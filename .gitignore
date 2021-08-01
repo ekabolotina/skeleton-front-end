@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+.env
+dist
+.bitmap
+
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+.idea
+.php_cs.cache
+yarn-error.log
+
+.vercel

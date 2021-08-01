@@ -1,0 +1,107 @@
+{
+    "name": "skeleton-front-end",
+    "version": "5.0.1",
+    "description": "Skeleton front-end project built on top of Next.js",
+    "license": "MIT",
+    "author": "ivan.rusia@mail.ru",
+    "scripts": {
+        "dev": "next",
+        "build": "next build",
+        "start": "next start",
+        "export": "next export",
+        "configure": "dotenv-configure .env.template .env",
+        "format": "prettier --write",
+        "format-all": "yarn run format \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\"",
+        "lint-js": "eslint --fix",
+        "lint-js-all": "yarn run lint-js \"src/**/*.{js,jsx,ts,tsx}\" --fix",
+        "lint-styles": "stylelint --fix --config ./.stylelintrc.full.json",
+        "lint-styles-all": "yarn run lint-styles \"src/**/*.{css,scss,js,jsx,ts,tsx}\""
+    },
+    "browserslist": [
+        "extends browserslist-config-google/no-ie"
+    ],
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "engines": {
+        "node": "^14.15.0",
+        "yarn": "^1.16.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ekabolotina/skeleton-front-end.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ekabolotina/skeleton-front-end/issues"
+    },
+    "dependencies": {
+        "@bit/taptima.common.svg-sprite-icon": "^1.0.1",
+        "@emotion/react": "^11.1.2",
+        "@emotion/styled": "^11.0.0",
+        "axios": "^0.19.2",
+        "formik": "^2.2.6",
+        "fp-ts": "^2.8.2",
+        "inversify": "^5.0.5",
+        "io-ts": "^2.2.10",
+        "io-ts-reporters": "^1.2.2",
+        "mobx": "^6.1.7",
+        "mobx-react": "^7.1.0",
+        "next": "^10.2.0",
+        "polished": "^3.6.4",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "reflect-metadata": "^0.1.13",
+        "slack": "^11.0.2"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.13.15",
+        "@babel/plugin-proposal-class-properties": "^7.10.4",
+        "@babel/plugin-proposal-decorators": "^7.12.1",
+        "@code-quality/stylelint-styled-components-config": "^1.7.0",
+        "@emotion/babel-plugin": "^11.1.2",
+        "@types/node": "^14.14.31",
+        "@types/react": "^17.0.2",
+        "@types/validate-npm-package-name": "^3.0.3",
+        "@typescript-eslint/eslint-plugin": "^4.15.2",
+        "@typescript-eslint/parser": "^4.15.2",
+        "autoprefixer": "^10.2.4",
+        "babel-preset-env": "^1.7.0",
+        "browserslist-config-google": "^2.0.0",
+        "dotenv-configure": "^0.1.0",
+        "dotenv-load": "^2.0.0",
+        "eslint": "^7.20.0",
+        "eslint-config-airbnb-typescript": "^12.3.1",
+        "eslint-config-prettier": "^8.1.0",
+        "eslint-import-resolver-typescript": "^2.4.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-react": "^7.22.0",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "husky": "^4.2.1",
+        "imagemin-mozjpeg": "^8.0.0",
+        "imagemin-optipng": "^7.0.0",
+        "imagemin-svgo": "^7.0.0",
+        "lint-staged": "^10.0.2",
+        "next-compose-plugins": "^2.2.0",
+        "next-env": "^1.1.0",
+        "next-optimized-images": "^2.5.3",
+        "node-sass": "^4.12.0",
+        "plop": "^2.7.4",
+        "postcss": "^8.2.10",
+        "postcss-easy-import": "^3.0.0",
+        "postcss-object-fit-images": "^1.1.2",
+        "prettier": "^2.2.1",
+        "regex-git": "^1.0.0",
+        "stylelint": "^13.11.0",
+        "stylelint-config-prettier": "^8.0.2",
+        "stylelint-config-standard": "^20.0.0",
+        "stylelint-order": "^4.1.0",
+        "svg-baker-runtime": "^1.4.2",
+        "svg-sprite-loader": "^6.0.5",
+        "typescript": "^4.1.5",
+        "validate-npm-package-name": "^3.0.0",
+        "webpack": "^5.33.2"
+    }
+}

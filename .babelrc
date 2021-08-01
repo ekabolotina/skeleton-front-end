@@ -1,0 +1,32 @@
+{
+    "env": {
+        "development": {
+            "presets": ["next/babel"],
+            "plugins": [
+                [
+                    "@babel/plugin-proposal-class-properties",
+                    { "loose": false }
+                ],
+                "@emotion",
+                [
+                    "@babel/plugin-proposal-decorators",
+                    { "legacy": true }
+                ]
+            ]
+        },
+        "production": {
+            "presets": ["next/babel"],
+            "plugins": [
+                [
+                    "@babel/plugin-proposal-class-properties",
+                    { "loose": false }
+                ],
+                "@emotion",
+                [
+                    "@babel/plugin-proposal-decorators",
+                    { "legacy": true }
+                ]
+            ]
+        }
+    }
+}
