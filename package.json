@@ -40,7 +40,7 @@
         "@bit/taptima.common.svg-sprite-icon": "^1.0.1",
         "@emotion/react": "^11.1.2",
         "@emotion/styled": "^11.0.0",
-        "axios": "^0.19.2",
+        "axios": "^0.21.2",
         "formik": "^2.2.6",
         "fp-ts": "^2.8.2",
         "inversify": "^5.0.5",
