@@ -1,10 +1,19 @@
 ## Set up new project
-1. Make sure you have [Node.js](https://nodejs.org/) (^14.15.0) and [Yarn](https://yarnpkg.com/) (^1.16.0) installed.
-2. Install the dependencies. Run:
+1. Create new directory for your new project. Run (replace `my-app` 
+with any name):
+   ```shell
+   mkdir my-app && cd my-app
+   ```
+2. Clone this repo. Run:
+   ```shell
+   git clone git@github.com:ekabolotina/skeleton-front-end.git .
+   ```
+3. Make sure you have [Node.js](https://nodejs.org/) (^14.15.0) and [Yarn](https://yarnpkg.com/) (^1.16.0) installed.
+4. Install the dependencies. Run:
     ```shell
     yarn
     ```
-3. Set up your new project using CLI. Run and follow the instructions:
+5. Set up your new project using CLI. Run and follow the instructions:
     ```shell
     yarn plop
     ```
