@@ -2,6 +2,11 @@ const validateNpmPackageName = require('validate-npm-package-name');
 const regexGit = require('regex-git');
 const { execSync } = require('child_process');
 
+const REMOVABLE_PATHS = [
+    './plopfile.js',
+    './.github',
+];
+
 function createModifyPackageJsonAction(key, value, shouldRemoveKey = false, pattern, template) {
     return {
         type: 'modify',
@@ -24,7 +29,10 @@ module.exports = function (plop) {
         console.log('\nRemoving unnecessary files. It will take a while. ⏳\n');
 
         execSync('yarn remove plop');
-        execSync('rm -rf ./plopfile.js');
+
+        REMOVABLE_PATHS.forEach((removablePath) => {
+            execSync(`rm -rf ${removablePath}`);
+        });
 
         console.log('\nUnnecessary files have been removed.\n');
     });
