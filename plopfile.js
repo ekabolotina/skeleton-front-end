@@ -98,7 +98,6 @@ module.exports = function (plop) {
         ],
         actions(data) {
             return [
-                createModifyPackageJsonAction('version', '1.0.0'),
                 createModifyPackageJsonAction('name', '{{ name }}'),
                 createModifyPackageJsonAction('description', '{{ description }}'),
                 createModifyPackageJsonAction('license', '{{ license }}', !data?.license),
