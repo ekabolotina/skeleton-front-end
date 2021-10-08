@@ -13,7 +13,7 @@
         "format": "prettier --write",
         "format-all": "yarn run format \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\"",
         "lint-js": "eslint --fix",
-        "lint-js-all": "yarn run lint-js \"src/**/*.{js,jsx,ts,tsx}\" --fix",
+        "lint-js-all": "yarn run lint-js \"src/**/*.{js,jsx,ts,tsx}\"",
         "lint-styles": "stylelint --fix --config ./.stylelintrc.full.json",
         "lint-styles-all": "yarn run lint-styles \"src/**/*.{css,scss,js,jsx,ts,tsx}\""
     },
@@ -61,6 +61,7 @@
         "@babel/plugin-proposal-decorators": "^7.12.1",
         "@code-quality/stylelint-styled-components-config": "^1.7.0",
         "@emotion/babel-plugin": "^11.1.2",
+        "@next/eslint-plugin-next": "^11.1.2",
         "@types/node": "^14.14.31",
         "@types/react": "^17.0.2",
         "@types/validate-npm-package-name": "^3.0.3",

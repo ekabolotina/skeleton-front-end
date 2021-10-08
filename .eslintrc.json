@@ -1,5 +1,10 @@
 {
-    "extends": ["plugin:@typescript-eslint/recommended", "airbnb-typescript", "prettier"],
+    "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "airbnb-typescript",
+        "plugin:@next/next/recommended",
+        "prettier"
+    ],
     "ignorePatterns": ["*.config.js"],
     "env": {
         "browser": true,

@@ -4,6 +4,9 @@ const withNextEnv = require('next-env');
 const dotenvLoad = require('dotenv-load');
 
 const nextConfig = {
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
     webpack(config) {
         const originalEntry = config.entry;
 
@@ -42,7 +45,4 @@ const nextConfig = {
 
 dotenvLoad();
 
-module.exports = withPlugins(
-    [withNextEnv(), [optimizedImages]],
-    nextConfig,
-);
+module.exports = withPlugins([withNextEnv(), [optimizedImages]], nextConfig);
