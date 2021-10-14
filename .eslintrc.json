@@ -10,11 +10,12 @@
         "browser": true,
         "node": true
     },
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
     "parserOptions": {
         "project": "./tsconfig.json",
         "tsconfigRootDir": "."
     },
-    "plugins": ["@typescript-eslint"],
     "settings": {
         "import/parsers": {
             "@typescript-eslint/parser": [".ts", ".tsx"]

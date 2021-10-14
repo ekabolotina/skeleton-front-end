@@ -16,14 +16,14 @@ module.exports = {
         const fileNames = getFilesListAsString(files, false);
 
         return [
-            `yarn run lint-js ${fileNames}`,
-            `yarn run lint-styles ${fileNamesEscaped}`,
-            `yarn run format ${fileNamesEscaped}`,
+            `yarn run lint-js ${fileNames} --fix`,
+            `yarn run lint-styles ${fileNamesEscaped} --fix`,
+            `yarn run format ${fileNamesEscaped} --write`,
         ];
     },
     '*.json': (files) => {
         const fileNamesEscaped = getFilesListAsString(files);
 
-        return [`yarn run format ${fileNamesEscaped}`];
+        return [`yarn run format ${fileNamesEscaped} --write`];
     },
 };
