@@ -1,5 +1,4 @@
 const withPlugins = require('next-compose-plugins');
-const optimizedImages = require('next-optimized-images');
 const withNextEnv = require('next-env');
 const dotenvLoad = require('dotenv-load');
 
@@ -19,6 +18,11 @@ const nextConfig = {
 
             return entries;
         };
+
+        config.module.rules.push({
+            test: /\.svg$/,
+            loader: 'svg-sprite-loader',
+        });
 
         config.module.rules = config.module.rules.map((rule) => {
             const { use } = rule;
@@ -45,4 +49,4 @@ const nextConfig = {
 
 dotenvLoad();
 
-module.exports = withPlugins([withNextEnv(), [optimizedImages]], nextConfig);
+module.exports = withPlugins([withNextEnv()], nextConfig);
