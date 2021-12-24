@@ -1,9 +1,12 @@
 import { css, SerializedStyles } from '@emotion/react';
-import { normalize } from 'polished';
+import normalize from 'polished/lib/mixins/normalize';
 import { ThemeT } from 'presentation/context/Theme';
+import fontsCss from 'presentation/component/layout/common/fontsCss';
 
 const globalCss = (theme: ThemeT): SerializedStyles => css`
-    ${normalize()}
+    ${normalize()};
+    ${fontsCss(theme)};
+
     html,
     body {
         margin: 0;

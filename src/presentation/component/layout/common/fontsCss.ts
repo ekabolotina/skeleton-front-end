@@ -1,5 +1,5 @@
 import { css, SerializedStyles } from '@emotion/react';
-import { fontFace } from 'polished';
+import fontFace from 'polished/lib/mixins/fontFace';
 import { ThemeT } from 'presentation/context/Theme';
 
 const fontsCss = (theme: ThemeT): SerializedStyles => css`
@@ -10,9 +10,8 @@ const fontsCss = (theme: ThemeT): SerializedStyles => css`
 
     ${fontFace({
         fontFamily: theme.font.family.base,
-        // Replace it
-        fontFilePath: '/fonts/Pragmatica-Book',
-        fileFormats: ['eot', 'woff', 'woff2', 'ttf'],
+        fontFilePath: '/fonts/Roboto400',
+        fileFormats: ['woff', 'woff2'],
         fontWeight: theme.font.weight.regular,
         fontStyle: 'normal',
         fontDisplay: 'swap',
