@@ -23,7 +23,7 @@ export default abstract class AbstractApi {
     ): Out {
         const decoded = DTO.decode(value);
 
-        Logger.DTOError(decoded, '');
+        Logger.handleDTOError(decoded, '');
 
         return baseFold<unknown, A, Out>(() => left, onRight)(decoded);
     }

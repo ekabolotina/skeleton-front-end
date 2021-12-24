@@ -53,8 +53,7 @@
         "polished": "^3.6.4",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "reflect-metadata": "^0.1.13",
-        "slack": "^11.0.2"
+        "reflect-metadata": "^0.1.13"
     },
     "devDependencies": {
         "@babel/core": "^7.13.15",

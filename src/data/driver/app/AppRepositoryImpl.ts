@@ -11,12 +11,10 @@ export default class AppRepositoryImpl implements AppRepository {
         makeAutoObservable(this);
     }
 
-    // eslint-disable-next-line class-methods-use-this
     public getUser(): User {
         return this.user;
     }
 
-    // eslint-disable-next-line class-methods-use-this
     public setUser(user: User): void {
         this.user = user;
     }
