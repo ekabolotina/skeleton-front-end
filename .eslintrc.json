@@ -49,6 +49,9 @@
                 "allowEmptyCatch": true
             }
         ],
+        "spaced-comment": "warn",
+        "no-unused-vars": "warn",
+        "no-underscore-dangle": "off",
         "consistent-return": "off",
         "react/state-in-constructor": ["error", "never"],
         "react/jsx-props-no-spreading": [

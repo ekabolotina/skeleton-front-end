@@ -11,7 +11,7 @@ const fontsCss = (theme: ThemeT): SerializedStyles => css`
     ${fontFace({
         fontFamily: theme.font.family.base,
         fontFilePath: '/fonts/Roboto400',
-        fileFormats: ['woff', 'woff2'],
+        fileFormats: ['woff2', 'woff'],
         fontWeight: theme.font.weight.regular,
         fontStyle: 'normal',
         fontDisplay: 'swap',

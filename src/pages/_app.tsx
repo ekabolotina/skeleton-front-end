@@ -4,7 +4,8 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { enableStaticRendering } from 'mobx-react';
 import isServer from 'helper/common/isServer';
-import { Provider as ThemeProvider } from 'presentation/context/Theme';
+import { ThemeProvider } from 'presentation/context/Theme';
+import Layout from 'presentation/component/layout';
 
 enableStaticRendering(isServer());
 
@@ -26,7 +27,9 @@ function App(props: AppProps): ReactElement {
                 <title>{TITLE}</title>
             </Head>
             <ThemeProvider>
-                <Component {...pageProps} />
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
             </ThemeProvider>
         </>
     );

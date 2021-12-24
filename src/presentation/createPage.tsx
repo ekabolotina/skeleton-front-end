@@ -4,9 +4,9 @@ import { observer } from 'mobx-react';
 import User from 'domain/entity/app/User';
 import appContainerFactory from 'container/AppContainer';
 import AppController from 'presentation/controller/app/AppController';
+import UiController from 'presentation/controller/ui/UiController';
 import { PageContextT } from 'presentation/type/Page';
 import { withContainerContext } from 'presentation/context/Container';
-import Private from 'presentation/component/layout/Private';
 
 type PageInitialPropsT = {
     appData: Record<string, unknown>;
@@ -42,8 +42,6 @@ export default function createPage<Q extends ParsedUrlQuery = ParsedUrlQuery>(
         return <PageComponent />;
     });
 
-    const PrivatePage = withAppContainerContext(Private);
-
     class Page extends Component<PageInitialPropsT> {
         static getInitialProps: (ctx: PageContextT<Q>) => Promise<PageInitialPropsT>;
 
@@ -58,14 +56,14 @@ export default function createPage<Q extends ParsedUrlQuery = ParsedUrlQuery>(
 
         render() {
             const container = appContainerFactory.getInstance();
-            const appController = container.get(AppController);
-            const { user } = appController;
+            const { user } = container.get(AppController);
+            const { setUiConfig } = container.get(UiController);
 
             if (!roles || roles.includes(user.role)) {
-                return <OriginalPage />;
+                setUiConfig({ variant: 'private' });
             }
 
-            return <PrivatePage />;
+            return <OriginalPage />;
         }
     }
 
