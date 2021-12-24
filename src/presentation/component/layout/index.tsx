@@ -8,6 +8,17 @@ import { LayoutWrapper } from './styles';
 /**
  * Warning!
  * Do not make multiple return statements.
+ *
+ * Usage example:
+ * const { wrapperConfig, headerConfig, footerConfig } = uiConfig;
+ *
+ * return (
+ *     <Wrapper {...wrapperConfig} {...restProps}>
+ *         <Header {...headerConfig} />
+ *         <Main>{children}</Main>
+ *         <Footer {...footerConfig}/>
+ *     </Wrapper>
+ * );
  * */
 
 const Layout: FC = (props) => {
