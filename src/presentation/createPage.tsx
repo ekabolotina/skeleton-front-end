@@ -5,8 +5,9 @@ import User from 'domain/entity/app/User';
 import appContainerFactory from 'container/AppContainer';
 import AppController from 'presentation/controller/app/AppController';
 import UiController from 'presentation/controller/ui/UiController';
-import { PageContextT } from 'presentation/type/Page';
 import { withContainerContext } from 'presentation/context/Container';
+import { PageContextT } from 'presentation/type/Page';
+import LayoutConfig from 'presentation/type/LayoutConfig';
 
 type PageInitialPropsT = {
     appData: Record<string, unknown>;
@@ -20,22 +21,25 @@ type OptionsT<Q> = {
         container: ReturnType<typeof appContainerFactory.getInstance>,
         nextPageContext: PageContextT<Q>,
     ) => Promise<void>;
+    withInitialProps?: boolean;
     roles?: User['role'][];
+    layoutConfig?: LayoutConfig;
 };
 
 export default function createPage<Q extends ParsedUrlQuery = ParsedUrlQuery>(
     PageComponent: ComponentType,
     options: OptionsT<Q> = {},
 ) {
-    const { effectCallback, getInitialProps, roles } = options;
+    const { effectCallback, getInitialProps, withInitialProps, roles, layoutConfig } = options;
     const withAppContainerContext = withContainerContext(appContainerFactory);
 
     const OriginalPage = withAppContainerContext(() => {
         useEffect(() => {
+            const container = appContainerFactory.getInstance();
+            container.get(UiController).handleLayoutUpdateOnRouteChange(layoutConfig);
+
             if (effectCallback) {
-                effectCallback(appContainerFactory.getInstance())
-                    .then(() => {})
-                    .catch(() => {});
+                effectCallback(container).then();
             }
         }, []);
 
@@ -54,24 +58,30 @@ export default function createPage<Q extends ParsedUrlQuery = ParsedUrlQuery>(
             container.hydrateData(appData);
         }
 
+        public componentDidMount(): void {
+            const container = appContainerFactory.getInstance();
+            container.get(AppController).clientSideInitialAction().then();
+        }
+
         render() {
             const container = appContainerFactory.getInstance();
             const { user } = container.get(AppController);
-            const { setUiConfig } = container.get(UiController);
+            const { setLayoutConfig } = container.get(UiController);
 
             if (!roles || roles.includes(user.role)) {
-                setUiConfig({ variant: 'private' });
+                setLayoutConfig({ variant: 'private' });
             }
 
             return <OriginalPage />;
         }
     }
 
-    if (getInitialProps) {
+    if (getInitialProps || withInitialProps) {
         Page.getInitialProps = async (ctx) => {
             const container = appContainerFactory.getInstance(true);
+            await container.get(AppController).appInitialAction();
 
-            await getInitialProps(container, ctx);
+            if (getInitialProps) await getInitialProps(container, ctx);
 
             return {
                 appData: container.serializeData(),
