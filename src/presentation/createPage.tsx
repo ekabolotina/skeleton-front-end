@@ -65,11 +65,15 @@ export default function createPage<Q extends ParsedUrlQuery = ParsedUrlQuery>(
 
         public componentDidMount(): void {
             const container = appContainerFactory.getInstance();
-            container.get(AppController)
+            container
+                .get(AppController)
                 .clientSideInitialAction()
                 .then(() => {})
                 .catch((e) => {
-                    Logger.handleError('Unhandled error in "createPage" clientSideInitialAction', e);
+                    Logger.handleError(
+                        'Unhandled error in "createPage" clientSideInitialAction',
+                        e,
+                    );
                 });
         }
 
