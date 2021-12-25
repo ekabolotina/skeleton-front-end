@@ -2,7 +2,11 @@ const withPlugins = require('next-compose-plugins');
 const optimizedImages = require('next-optimized-images');
 const withNextEnv = require('next-env');
 const dotenvLoad = require('dotenv-load');
+const { withSentryConfig } = require('@sentry/nextjs');
 
+/**
+ * @type {import('next').NextConfig}
+ **/
 const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
@@ -45,4 +49,19 @@ const nextConfig = {
 
 dotenvLoad();
 
-module.exports = withPlugins([withNextEnv(), [optimizedImages]], nextConfig);
+/**
+ * @type {import('@sentry/nextjs/dist/config/types').SentryWebpackPluginOptions}
+ **/
+const SentryWebpackPluginOptions = {
+    include: '.next',
+    ignore: ['node_modules'],
+    urlPrefix: '~/_next',
+    configFile: 'sentry.properties',
+};
+
+const nextConfigWithPlugins = withPlugins([withNextEnv(), [optimizedImages]], nextConfig);
+
+module.exports =
+    process.env.NODE_ENV === 'production' && Boolean(process.env.NEXT_STATIC_SENTRY_DSN)
+        ? withSentryConfig(nextConfigWithPlugins, SentryWebpackPluginOptions)
+        : nextConfigWithPlugins;

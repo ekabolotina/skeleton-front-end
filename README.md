@@ -53,5 +53,8 @@ variables bellow. Run:
 API calls.
 2. `NEXT_STATIC_ASSETS_VERSION` — version of public assets. Can be used
 to reset browser cache of any assets.
-3. `NEXT_STATIC_SLACK_API_TOKEN` and `NEXT_STATIC_SLACK_API_CHANNEL` —
-used to log errors to any Slack channel using [Slack APIs](https://api.slack.com/apis).
+3. `NEXT_STATIC_SENTRY_DSN` — used to log errors to Sentry.
+
+**Sentry**
+1. Add NEXT_STATIC_SENTRY_DSN to `.env` file
+2. `sentry-cli login` — to login through browser or enter auth token

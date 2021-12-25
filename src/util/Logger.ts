@@ -1,6 +1,7 @@
 import { Either } from 'fp-ts/lib/Either';
 import { Errors } from 'io-ts';
 import reporter from 'io-ts-reporters';
+import * as Sentry from '@sentry/nextjs';
 
 export type AdditionalInfoT = {
     title: string;
@@ -18,9 +19,13 @@ export default class Logger {
             console.log({ title, error, additional });
         }
 
-        // if (process.env.NODE_ENV === 'production') {
-        //    // Report to Slack, Sentry etc.
-        // }
+        if (process.env.NODE_ENV === 'production') {
+            if (error) {
+                this.sendErrorToSentry(error).then();
+            } else if (additional) {
+                this.sendErrorToSentry(new Error(`${title}: ${JSON.stringify(additional)}`)).then();
+            }
+        }
     }
 
     public static handleDTOError<O>(result: Either<Errors, O>): void {
@@ -36,5 +41,14 @@ export default class Logger {
                 })),
             );
         }
+    }
+    
+    private static async sendErrorToSentry(error: Error): Promise<void> {
+        if (!process.env.NEXT_STATIC_SENTRY_DSN || process.env.NODE_ENV !== 'production') return;
+        
+        try {
+            Sentry.captureException(error);
+            await Sentry.flush(2000);
+        } catch {}
     }
 }

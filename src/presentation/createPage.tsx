@@ -3,6 +3,7 @@ import React, { Component, ComponentType, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import User from 'domain/entity/app/User';
 import appContainerFactory from 'container/AppContainer';
+import Logger from 'util/Logger';
 import AppController from 'presentation/controller/app/AppController';
 import UiController from 'presentation/controller/ui/UiController';
 import { withContainerContext } from 'presentation/context/Container';
@@ -39,7 +40,11 @@ export default function createPage<Q extends ParsedUrlQuery = ParsedUrlQuery>(
             container.get(UiController).handleLayoutUpdateOnRouteChange(layoutConfig);
 
             if (effectCallback) {
-                effectCallback(container).then();
+                effectCallback(container)
+                    .then(() => {})
+                    .catch((e) => {
+                        Logger.handleError('Unhandled error in "createPage" effect callback', e);
+                    });
             }
         }, []);
 
@@ -60,7 +65,12 @@ export default function createPage<Q extends ParsedUrlQuery = ParsedUrlQuery>(
 
         public componentDidMount(): void {
             const container = appContainerFactory.getInstance();
-            container.get(AppController).clientSideInitialAction().then();
+            container.get(AppController)
+                .clientSideInitialAction()
+                .then(() => {})
+                .catch((e) => {
+                    Logger.handleError('Unhandled error in "createPage" clientSideInitialAction', e);
+                });
         }
 
         render() {
