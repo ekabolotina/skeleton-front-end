@@ -1,9 +1,12 @@
 import { css, SerializedStyles } from '@emotion/react';
-import { normalize } from 'polished';
+import normalize from 'polished/lib/mixins/normalize';
 import { ThemeT } from 'presentation/context/Theme';
+import fontsCss from 'presentation/component/layout/common/fontsCss';
 
 const globalCss = (theme: ThemeT): SerializedStyles => css`
-    ${normalize()}
+    ${normalize()};
+    ${fontsCss(theme)};
+
     html,
     body {
         margin: 0;
@@ -25,11 +28,13 @@ const globalCss = (theme: ThemeT): SerializedStyles => css`
     p,
     h4,
     h3,
-    h2 {
+    h2,
+    h1 {
         margin: 0;
     }
 
     a {
+        color: inherit;
         text-decoration: none;
     }
 
@@ -42,6 +47,7 @@ const globalCss = (theme: ThemeT): SerializedStyles => css`
     button {
         padding: 0;
         border: none;
+        cursor: pointer;
         background-color: transparent;
         font: inherit;
         line-height: inherit;

@@ -1,5 +1,5 @@
 import { css, SerializedStyles } from '@emotion/react';
-import Breakpoint from 'enum/Breakpoint';
+import Breakpoint from './Breakpoint';
 
 const lower = (bp: Breakpoint): string => `(max-width: ${bp - 1}px)`;
 const greater = (bp: Breakpoint): string => `(min-width: ${bp}px)`;
@@ -25,18 +25,18 @@ type RuleT = keyof typeof rule;
 /**
  * @example
  *
- * styled.div`
- *     ${mq.lowerSm} {
- *         color: red;
- *     }
- * `
+ *  styled.div`
+ *      ${mq.lowerSm} {
+ *          color: red;
+ *      }
+ *  `;
  *
  * // same as above
- * styled.div`
- *     @media (max-width: ${Breakpoint.Sm}) {
- *         color: red;
- *     }
- * `
+ *  styled.div`
+ *      @media (max-width: ${Breakpoint.Sm}) {
+ *          color: red;
+ *      }
+ *  `;
  * */
 export const mq = (Object.keys(rule) as RuleT[]).reduce(
     (acc, bp) => ({

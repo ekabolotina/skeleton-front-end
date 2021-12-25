@@ -4,9 +4,10 @@ import { observer } from 'mobx-react';
 import User from 'domain/entity/app/User';
 import appContainerFactory from 'container/AppContainer';
 import AppController from 'presentation/controller/app/AppController';
-import { PageContextT } from 'presentation/type/Page';
+import UiController from 'presentation/controller/ui/UiController';
 import { withContainerContext } from 'presentation/context/Container';
-import Private from 'presentation/component/layout/Private';
+import { PageContextT } from 'presentation/type/Page';
+import LayoutConfig from 'presentation/type/LayoutConfig';
 
 type PageInitialPropsT = {
     appData: Record<string, unknown>;
@@ -20,29 +21,30 @@ type OptionsT<Q> = {
         container: ReturnType<typeof appContainerFactory.getInstance>,
         nextPageContext: PageContextT<Q>,
     ) => Promise<void>;
+    withInitialProps?: boolean;
     roles?: User['role'][];
+    layoutConfig?: LayoutConfig;
 };
 
 export default function createPage<Q extends ParsedUrlQuery = ParsedUrlQuery>(
     PageComponent: ComponentType,
     options: OptionsT<Q> = {},
 ) {
-    const { effectCallback, getInitialProps, roles } = options;
+    const { effectCallback, getInitialProps, withInitialProps, roles, layoutConfig } = options;
     const withAppContainerContext = withContainerContext(appContainerFactory);
 
     const OriginalPage = withAppContainerContext(() => {
         useEffect(() => {
+            const container = appContainerFactory.getInstance();
+            container.get(UiController).handleLayoutUpdateOnRouteChange(layoutConfig);
+
             if (effectCallback) {
-                effectCallback(appContainerFactory.getInstance())
-                    .then(() => {})
-                    .catch(() => {});
+                effectCallback(container).then();
             }
         }, []);
 
         return <PageComponent />;
     });
-
-    const PrivatePage = withAppContainerContext(Private);
 
     class Page extends Component<PageInitialPropsT> {
         static getInitialProps: (ctx: PageContextT<Q>) => Promise<PageInitialPropsT>;
@@ -56,24 +58,30 @@ export default function createPage<Q extends ParsedUrlQuery = ParsedUrlQuery>(
             container.hydrateData(appData);
         }
 
+        public componentDidMount(): void {
+            const container = appContainerFactory.getInstance();
+            container.get(AppController).clientSideInitialAction().then();
+        }
+
         render() {
             const container = appContainerFactory.getInstance();
-            const appController = container.get(AppController);
-            const { user } = appController;
+            const { user } = container.get(AppController);
+            const { setLayoutConfig } = container.get(UiController);
 
             if (!roles || roles.includes(user.role)) {
-                return <OriginalPage />;
+                setLayoutConfig({ variant: 'private' });
             }
 
-            return <PrivatePage />;
+            return <OriginalPage />;
         }
     }
 
-    if (getInitialProps) {
+    if (getInitialProps || withInitialProps) {
         Page.getInitialProps = async (ctx) => {
             const container = appContainerFactory.getInstance(true);
+            await container.get(AppController).appInitialAction();
 
-            await getInitialProps(container, ctx);
+            if (getInitialProps) await getInitialProps(container, ctx);
 
             return {
                 appData: container.serializeData(),
