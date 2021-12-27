@@ -8,7 +8,9 @@ interface AppErrorProps extends ErrorProps {
     hasGetInitialPropsRun?: boolean;
 }
 
-const Error: NextPage<AppErrorProps> = ({ hasGetInitialPropsRun, err, statusCode }) => {
+const Error: NextPage<AppErrorProps> = (props) => {
+    const { hasGetInitialPropsRun, err, statusCode } = props;
+
     if (!hasGetInitialPropsRun && err) {
         Logger.handleError('On error page, client side', err);
     }
