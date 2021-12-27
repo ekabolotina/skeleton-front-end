@@ -74,7 +74,8 @@ module.exports = function (plop) {
             {
                 type: 'input',
                 name: 'license',
-                message: '3/6 Project licence (ex.: MIT)',
+                default: 'MIT',
+                message: '3/6 Project licence',
             },
             {
                 type: 'confirm',

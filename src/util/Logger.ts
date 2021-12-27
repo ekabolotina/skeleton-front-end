@@ -1,7 +1,7 @@
 import { Either } from 'fp-ts/lib/Either';
 import { Errors } from 'io-ts';
 import reporter from 'io-ts-reporters';
-import slack from 'slack';
+import * as Sentry from '@sentry/nextjs';
 
 export type AdditionalInfoT = {
     title: string;
@@ -9,72 +9,31 @@ export type AdditionalInfoT = {
 };
 
 export default class Logger {
-    static error(title = '', route = '', error?: Error | null, additional: AdditionalInfoT[] = []) {
-        if (
-            !process.env.NEXT_STATIC_SLACK_API_TOKEN ||
-            !process.env.NEXT_STATIC_SLACK_API_CHANNEL
-        ) {
-            if (process.env.NODE_ENV === 'development') {
-                // eslint-disable-next-line no-console
-                console.log({
-                    title,
-                    route,
-                    error,
-                    additional,
-                });
-            }
-
-            return;
+    public static handleError(
+        title = '',
+        error?: Error | null,
+        additional: AdditionalInfoT[] = [],
+    ) {
+        if (process.env.NODE_ENV === 'development') {
+            // eslint-disable-next-line no-console
+            console.log({ title, error, additional });
         }
 
-        try {
-            let fields = [
-                {
-                    title: 'Message',
-                    value: error?.message,
-                    short: false,
-                },
-                {
-                    title: 'Error stacktrace',
-                    value: error?.stack,
-                    short: true,
-                },
-            ];
-
-            if (additional) {
-                fields = fields.concat(
-                    additional.map(({ title: fieldTitle, value }) => ({
-                        value,
-                        title: fieldTitle,
-                        short: true,
-                    })),
-                );
+        if (process.env.NODE_ENV === 'production') {
+            if (error) {
+                this.sendErrorToSentry(error).then();
+            } else if (additional) {
+                this.sendErrorToSentry(new Error(`${title}: ${JSON.stringify(additional)}`)).then();
             }
-
-            slack.chat.postMessage({
-                token: process.env.NEXT_STATIC_SLACK_API_TOKEN,
-                channel: process.env.NEXT_STATIC_SLACK_API_CHANNEL,
-                text: '',
-                attachments: JSON.stringify([
-                    {
-                        color: '#00FF00',
-                        title,
-                        author_name: route,
-                        fields,
-                    },
-                ]),
-                icon_emoji: ':skull_and_crossbones',
-            });
-        } catch (e) {}
+        }
     }
 
-    static DTOError<O>(result: Either<Errors, O>, route: string): void {
+    public static handleDTOError<O>(result: Either<Errors, O>): void {
         const report = reporter.report(result);
 
         if (report.length > 0) {
-            this.error(
+            this.handleError(
                 'Decode/Encode error (DTO)',
-                route,
                 null,
                 report.map((error, index) => ({
                     title: `Problem ${index + 1}`,
@@ -82,5 +41,14 @@ export default class Logger {
                 })),
             );
         }
+    }
+
+    private static async sendErrorToSentry(error: Error): Promise<void> {
+        if (!process.env.NEXT_STATIC_SENTRY_DSN || process.env.NODE_ENV !== 'production') return;
+
+        try {
+            Sentry.captureException(error);
+            await Sentry.flush(2000);
+        } catch {}
     }
 }
