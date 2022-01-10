@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/nextjs';
 
-const SENTRY_DSN = process.env.NEXT_STATIC_SENTRY_DSN;
+const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN;
 
 Sentry.init({
     enabled: Boolean(SENTRY_DSN) && process.env.NODE_ENV === 'production',

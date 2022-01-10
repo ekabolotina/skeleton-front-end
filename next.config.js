@@ -1,5 +1,4 @@
 const withPlugins = require('next-compose-plugins');
-const withNextEnv = require('next-env');
 const dotenvLoad = require('dotenv-load');
 const { withSentryConfig } = require('@sentry/nextjs');
 
@@ -63,9 +62,9 @@ const SentryWebpackPluginOptions = {
     configFile: 'sentry.properties',
 };
 
-const nextConfigWithPlugins = withPlugins([withNextEnv()], nextConfig);
+const nextConfigWithPlugins = withPlugins([], nextConfig);
 
 module.exports =
-    process.env.NODE_ENV === 'production' && Boolean(process.env.NEXT_STATIC_SENTRY_DSN)
+    process.env.NODE_ENV === 'production' && Boolean(process.env.NEXT_PUBLIC_SENTRY_DSN)
         ? withSentryConfig(nextConfigWithPlugins, SentryWebpackPluginOptions)
         : nextConfigWithPlugins;

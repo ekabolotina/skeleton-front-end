@@ -44,7 +44,7 @@ export default class Logger {
     }
 
     private static async sendErrorToSentry(error: Error): Promise<void> {
-        if (!process.env.NEXT_STATIC_SENTRY_DSN || process.env.NODE_ENV !== 'production') return;
+        if (!process.env.NEXT_PUBLIC_SENTRY_DSN || process.env.NODE_ENV !== 'production') return;
 
         try {
             Sentry.captureException(error);
