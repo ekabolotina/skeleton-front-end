@@ -11,7 +11,7 @@
         "node": true
     },
     "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint"],
+    "plugins": ["@typescript-eslint", "import", "jsx-a11y", "react", "react-hooks"],
     "parserOptions": {
         "project": "./tsconfig.json",
         "tsconfigRootDir": "."
