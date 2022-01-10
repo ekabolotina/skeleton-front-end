@@ -4,8 +4,8 @@ import { observer } from 'mobx-react';
 import appContainerFactory from 'container/AppContainer';
 import User from 'domain/entity/app/User';
 import Logger from 'util/Logger';
-import AppController from 'presentation/controller/global/AppController';
-import UiController from 'presentation/controller/global/UiController';
+import AppGlobalController from 'presentation/controller/AppGlobalController';
+import UiGlobalController from 'presentation/controller/UiGlobalController';
 import { withContainerContext } from 'presentation/context/Container';
 import { PageContextT } from 'presentation/type/Page';
 import LayoutConfig from 'presentation/type/LayoutConfig';
@@ -37,7 +37,7 @@ export default function createPage<Q extends ParsedUrlQuery = ParsedUrlQuery>(
     const OriginalPage = withAppContainerContext(() => {
         useEffect(() => {
             const container = appContainerFactory.getInstance();
-            container.get(UiController).handleLayoutUpdateOnRouteChange(layoutConfig);
+            container.get(UiGlobalController).handleLayoutUpdateOnRouteChange(layoutConfig);
 
             if (effectCallback) {
                 effectCallback(container)
@@ -66,7 +66,7 @@ export default function createPage<Q extends ParsedUrlQuery = ParsedUrlQuery>(
         public componentDidMount(): void {
             const container = appContainerFactory.getInstance();
             container
-                .get(AppController)
+                .get(AppGlobalController)
                 .clientSideInitialAction()
                 .then(() => {})
                 .catch((e) => {
@@ -79,8 +79,8 @@ export default function createPage<Q extends ParsedUrlQuery = ParsedUrlQuery>(
 
         render() {
             const container = appContainerFactory.getInstance();
-            const { user } = container.get(AppController);
-            const { setLayoutConfig } = container.get(UiController);
+            const { user } = container.get(AppGlobalController);
+            const { setLayoutConfig } = container.get(UiGlobalController);
 
             if (!roles || roles.includes(user.role)) {
                 setLayoutConfig({ variant: 'private' });
@@ -93,7 +93,7 @@ export default function createPage<Q extends ParsedUrlQuery = ParsedUrlQuery>(
     if (getInitialProps || withInitialProps) {
         Page.getInitialProps = async (ctx) => {
             const container = appContainerFactory.getInstance(true);
-            await container.get(AppController).appInitialAction();
+            await container.get(AppGlobalController).appInitialAction();
 
             if (getInitialProps) await getInitialProps(container, ctx);
 
