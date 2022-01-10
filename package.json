@@ -19,7 +19,7 @@
         "lint": "yarn run lint-js-all && yarn run lint-styles-all && yarn format-all --check"
     },
     "browserslist": [
-        "extends browserslist-config-google/no-ie"
+        "extends browserslist-config-google"
     ],
     "engines": {
         "node": "^14.15.0",
@@ -77,7 +77,7 @@
         "eslint-plugin-react": "^7.28.0",
         "eslint-plugin-react-hooks": "^4.3.0",
         "husky": "^7.0.0",
-        "lint-staged": "^10.0.2",
+        "lint-staged": "^12.1.7",
         "next-compose-plugins": "^2.2.0",
         "next-env": "^1.1.0",
         "node-sass": "^4.12.0",
