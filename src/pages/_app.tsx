@@ -4,8 +4,8 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { enableStaticRendering } from 'mobx-react';
 import isServer from 'helper/common/isServer';
-import { ThemeProvider } from 'presentation/context/Theme';
 import Layout from 'presentation/component/layout';
+import { ThemeProvider } from 'presentation/context/Theme';
 
 enableStaticRendering(isServer());
 

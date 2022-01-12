@@ -12,7 +12,7 @@
         "configure": "dotenv-configure .env.template .env",
         "format": "prettier --write --check",
         "format-all": "yarn run format \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\"",
-        "lint-js": "eslint",
+        "lint-js": "eslint --fix",
         "lint-js-all": "yarn run lint-js \"src/**/*.{js,jsx,ts,tsx}\"",
         "lint-styles": "stylelint --config ./.stylelintrc.full.json",
         "lint-styles-all": "yarn run lint-styles \"src/**/*.{css,scss,js,jsx,ts,tsx}\"",
