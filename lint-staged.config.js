@@ -1,11 +1,11 @@
 function getFilesListAsString(files, escapeSquareBrackets = false) {
     return files
-        .reduce((paths, path) => {
+        .reduce((acc, path) => {
             if (escapeSquareBrackets) {
                 path = path.replace('[', '\\[').replace(']', '\\]');
             }
 
-            return paths.concat(path);
+            return acc.concat(path);
         }, [])
         .join(' ');
 }
@@ -17,7 +17,6 @@ module.exports = {
 
         return [
             `yarn run lint-js ${fileNames} --fix`,
-            `yarn run lint-styles ${fileNamesEscaped} --fix`,
             `yarn run format ${fileNamesEscaped} --write`,
         ];
     },

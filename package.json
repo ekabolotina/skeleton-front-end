@@ -14,7 +14,7 @@
         "format-all": "yarn run format \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\"",
         "lint-js": "eslint --fix",
         "lint-js-all": "yarn run lint-js \"src/**/*.{js,jsx,ts,tsx}\"",
-        "lint-styles": "stylelint --config ./.stylelintrc.full.json",
+        "lint-styles": "stylelint --config .stylelintrc.json",
         "lint-styles-all": "yarn run lint-styles \"src/**/*.{css,scss,js,jsx,ts,tsx}\"",
         "lint": "yarn run lint-js-all && yarn run lint-styles-all && yarn format-all --check"
     },
@@ -54,7 +54,8 @@
         "polished": "^3.6.4",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "reflect-metadata": "^0.1.13"
+        "reflect-metadata": "^0.1.13",
+        "stylelint-processor-styled-components": "^1.10.0"
     },
     "devDependencies": {
         "@babel/core": "^7.13.15",
@@ -99,7 +100,8 @@
         "stylelint": "^13.11.0",
         "stylelint-config-prettier": "^8.0.2",
         "stylelint-config-standard": "^20.0.0",
-        "stylelint-order": "^4.1.0",
+        "stylelint-config-styled-components": "^0.1.1",
+        "stylelint-order": "^5.0.0",
         "svg-baker-runtime": "^1.4.2",
         "svg-sprite-loader": "^6.0.9",
         "typescript": "^4.4.3",
