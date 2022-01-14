@@ -54,4 +54,4 @@ to reset browser cache of any assets.
 **Sentry**
 1. Add NEXT_PUBLIC_SENTRY_DSN to `.env` file
 2. `sentry-cli login` — to login through browser or enter auth token
-3. Fill `defaults.project` field in `/sentry.properties` file
+3. Fill `defaults.project` field in `sentry.properties` file
