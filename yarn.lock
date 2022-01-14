@@ -8800,15 +8800,6 @@ supports-color@^9.2.1:
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-9.2.1.tgz#599dc9d45acf74c6176e0d880bab1d7d718fe891"
   integrity sha512-Obv7ycoCTG51N7y175StI9BlAXrmgZrFhZOb0/PyjHBher/NmsdBgbbQ1Inhq+gIhz6+7Gb+jWF2Vqi7Mf1xnQ==
 
-svg-baker-runtime@^1.4.2:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/svg-baker-runtime/-/svg-baker-runtime-1.4.3.tgz#8ec035daf3af4abe7e788120868ebbf84a34468f"
-  integrity sha512-QY6RlJN3v6xPxVQboSrsGiLWaWay+uFstic6QEzoIUK2l6M/lqL/wiqFcoqroBsGpqpP0knXplltLZGTzncbNw==
-  dependencies:
-    deepmerge "1.3.2"
-    mitt "1.1.2"
-    svg-baker "^1.5.0"
-
 svg-baker-runtime@^1.4.7:
   version "1.4.7"
   resolved "https://registry.yarnpkg.com/svg-baker-runtime/-/svg-baker-runtime-1.4.7.tgz#f4720637f5b6202eef6378d81f1fead0815f8a4e"
@@ -8856,10 +8847,10 @@ svg-baker@^1.7.0:
     query-string "^4.3.2"
     traverse "^0.6.6"
 
-svg-sprite-loader@^6.0.9:
-  version "6.0.9"
-  resolved "https://registry.yarnpkg.com/svg-sprite-loader/-/svg-sprite-loader-6.0.9.tgz#f1a1089c38600ebd5fb8d09dfa3c83aa4434a2b4"
-  integrity sha512-V/F3iI1J/xWeO0cRXkEFvhujvBQ3deAPFlhip+AW00Hs+9gighu619mblucIWdRPmDMfcSWJD/ZuXf6HldIskw==
+svg-sprite-loader@^6.0.11:
+  version "6.0.11"
+  resolved "https://registry.yarnpkg.com/svg-sprite-loader/-/svg-sprite-loader-6.0.11.tgz#a4d60cee3d74232a2c17d31c73a2008295f61220"
+  integrity sha512-TedsTf8wsHH6HgdwKjUveDZRC6q5gPloYV8A8/zZaRWP929J7x6TzQ6MvZFl+YYDJuJ0Akyuu/vNVJ+fbPuYXg==
   dependencies:
     bluebird "^3.5.0"
     deepmerge "1.3.2"
