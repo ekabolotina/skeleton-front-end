@@ -79,7 +79,7 @@
         "lint-staged": "^12.1.7",
         "node-sass": "^4.12.0",
         "plop": "^2.7.4",
-        "prettier": "^2.2.1",
+        "prettier": "^2.5.1",
         "regex-git": "^1.0.0",
         "stylelint": "^13.11.0",
         "stylelint-config-prettier": "^8.0.2",
