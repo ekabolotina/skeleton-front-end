@@ -22,15 +22,15 @@
         "extends browserslist-config-google"
     ],
     "engines": {
-        "node": "^14.15.0",
-        "yarn": "^1.16.0"
+        "node": "^16.13.0",
+        "yarn": "^1.22.0"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/ekabolotina/skeleton-front-end.git"
+        "url": "https://github.com/taptima/skeleton-front-end.git"
     },
     "bugs": {
-        "url": "https://github.com/ekabolotina/skeleton-front-end/issues"
+        "url": "https://github.com/taptima/skeleton-front-end/issues"
     },
     "dependencies": {
         "@bit/taptima.common.svg-sprite-icon": "^2.0.5",
@@ -77,7 +77,7 @@
         "eslint-plugin-react-hooks": "^4.3.0",
         "husky": "^7.0.0",
         "lint-staged": "^12.1.7",
-        "node-sass": "^4.12.0",
+        "node-sass": "6",
         "plop": "^2.7.4",
         "prettier": "^2.5.1",
         "regex-git": "^1.0.0",

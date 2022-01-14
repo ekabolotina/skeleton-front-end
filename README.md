@@ -3,7 +3,7 @@
    ```shell
    git clone git@github.com:taptima/skeleton-front-end.git <my-app-name>
    ```
-2. Make sure you have [Node.js](https://nodejs.org/) (^14.15.0) and [Yarn](https://yarnpkg.com/) (^1.16.0) installed.
+2. Make sure you have [Node.js](https://nodejs.org/) (^16.13.0) and [Yarn](https://yarnpkg.com/) (^1.22.0) installed.
 4. Install the dependencies. Run:
     ```shell
     yarn
