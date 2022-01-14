@@ -1,4 +1,3 @@
-const dotenvLoad = require('dotenv-load');
 const { withSentryConfig } = require('@sentry/nextjs');
 
 /**
@@ -48,8 +47,6 @@ const nextConfig = {
         return config;
     },
 };
-
-dotenvLoad();
 
 /**
  * @type {import('@sentry/nextjs/dist/config/types').SentryWebpackPluginOptions}
