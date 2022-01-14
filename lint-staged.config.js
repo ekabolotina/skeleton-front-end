@@ -15,10 +15,7 @@ module.exports = {
         const fileNamesEscaped = getFilesListAsString(files, true);
         const fileNames = getFilesListAsString(files, false);
 
-        return [
-            `yarn run lint-js ${fileNames} --fix`,
-            `yarn run format ${fileNamesEscaped} --write`,
-        ];
+        return [`yarn run lint-js ${fileNames}`, `yarn run format ${fileNamesEscaped} --write`];
     },
     '*.json': (files) => {
         const fileNamesEscaped = getFilesListAsString(files);

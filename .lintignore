@@ -1,6 +1,6 @@
 .next
+.github
 .cache
-out
 public
 __mocks__
 package.json
