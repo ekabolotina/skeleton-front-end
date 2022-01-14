@@ -1,6 +1,6 @@
 import { Container as BaseContainer } from 'inversify';
-import isServer from 'helper/common/isServer';
 import Repository from 'framework/Repository';
+import isServer from 'helper/common/isServer';
 
 export default abstract class Container<
     DataT extends Record<string, Repository> = Record<string, Repository>
