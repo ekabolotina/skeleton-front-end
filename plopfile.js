@@ -7,7 +7,7 @@ const REMOVABLE_PATHS = [
     './.github',
 ];
 
-const REMOVABLE_MODULES = [
+const PLOP_CONFIG_MODULES = [
     'plop',
     'regex-git',
     'validate-npm-package-name',
@@ -36,7 +36,7 @@ module.exports = function (plop) {
     plop.setActionType('$prepareProject', () => {
         console.log('\nRemoving unnecessary files. It will take a while. ⏳\n');
 
-        execSync(`yarn remove ${REMOVABLE_MODULES.join(' ')}`);
+        execSync(`yarn remove ${PLOP_CONFIG_MODULES.join(' ')}`);
 
         REMOVABLE_PATHS.forEach((removablePath) => {
             execSync(`rm -rf ${removablePath}`);
