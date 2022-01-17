@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Global } from '@emotion/react';
 import appContainerFactory from 'container/AppContainer';
-import UiController from 'presentation/controller/ui/UiController';
+import UiGlobalController from 'presentation/controller/UiGlobalController';
 import globalCss from 'presentation/component/layout/common/globalCss';
 import { LayoutWrapper } from './styles';
 
@@ -20,11 +20,10 @@ import { LayoutWrapper } from './styles';
  *     </Wrapper>
  * );
  * */
-
 const Layout: FC = (props) => {
     const { children } = props;
     const container = appContainerFactory.getInstance();
-    const { uiConfig } = container.get(UiController);
+    const { uiConfig } = container.get(UiGlobalController);
     const { variant } = uiConfig;
 
     return (

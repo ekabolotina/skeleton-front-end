@@ -5,7 +5,7 @@ type PropsT = {
     statusCode: HttpStatusCode;
 };
 
-const ErrorPage: FC<PropsT> = (props: PropsT) => {
+const ErrorPage: FC<PropsT> = (props) => {
     const { statusCode } = props;
     const message =
         statusCode === HttpStatusCode.NotFound

@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify';
 import AppRepository from 'domain/repository/app/AppRepository';
 
 @injectable()
-export default class AppController {
+export default class AppGlobalController {
     @inject(AppRepository)
     private readonly appRepository!: AppRepository;
 
