@@ -1,9 +1,9 @@
 import { Container as BaseContainer } from 'inversify';
-import Repository from 'framework/Repository';
+import SerializableRepository from 'framework/SerializableRepository';
 import isServer from 'helper/common/isServer';
 
 export default abstract class Container<
-    DataT extends Record<string, Repository> = Record<string, Repository>
+    DataT extends Record<string, SerializableRepository> = Record<string, SerializableRepository>
 > extends BaseContainer {
     public parent: Container | null = null;
 

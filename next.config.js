@@ -1,7 +1,3 @@
-const withPlugins = require('next-compose-plugins');
-const optimizedImages = require('next-optimized-images');
-const withNextEnv = require('next-env');
-const dotenvLoad = require('dotenv-load');
 const { withSentryConfig } = require('@sentry/nextjs');
 
 /**
@@ -23,6 +19,11 @@ const nextConfig = {
 
             return entries;
         };
+
+        config.module.rules.push({
+            test: /\.svg$/,
+            loader: 'svg-sprite-loader',
+        });
 
         config.module.rules = config.module.rules.map((rule) => {
             const { use } = rule;
@@ -47,8 +48,6 @@ const nextConfig = {
     },
 };
 
-dotenvLoad();
-
 /**
  * @type {import('@sentry/nextjs/dist/config/types').SentryWebpackPluginOptions}
  **/
@@ -59,9 +58,7 @@ const SentryWebpackPluginOptions = {
     configFile: 'sentry.properties',
 };
 
-const nextConfigWithPlugins = withPlugins([withNextEnv(), [optimizedImages]], nextConfig);
-
 module.exports =
-    process.env.NODE_ENV === 'production' && Boolean(process.env.NEXT_STATIC_SENTRY_DSN)
-        ? withSentryConfig(nextConfigWithPlugins, SentryWebpackPluginOptions)
-        : nextConfigWithPlugins;
+    process.env.NODE_ENV === 'production' && Boolean(process.env.NEXT_PUBLIC_SENTRY_DSN)
+        ? withSentryConfig(nextConfig, SentryWebpackPluginOptions)
+        : nextConfig;

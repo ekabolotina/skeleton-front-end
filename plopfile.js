@@ -2,9 +2,16 @@ const validateNpmPackageName = require('validate-npm-package-name');
 const regexGit = require('regex-git');
 const { execSync } = require('child_process');
 
-const REMOVABLE_PATHS = [
+const PLOP_CONFIG_PATHS = [
     './plopfile.js',
     './.github',
+];
+
+const PLOP_CONFIG_MODULES = [
+    'plop',
+    'regex-git',
+    'validate-npm-package-name',
+    '@types/validate-npm-package-name'
 ];
 
 function createModifyPackageJsonAction(key, value, shouldRemoveKey = false, pattern, template) {
@@ -28,9 +35,9 @@ module.exports = function (plop) {
     plop.setActionType('$prepareProject', () => {
         console.log('\nRemoving unnecessary files. It will take a while. ⏳\n');
 
-        execSync('yarn remove plop');
+        execSync(`yarn remove ${PLOP_CONFIG_MODULES.join(' ')}`);
 
-        REMOVABLE_PATHS.forEach((removablePath) => {
+        PLOP_CONFIG_PATHS.forEach((removablePath) => {
             execSync(`rm -rf ${removablePath}`);
         });
 
